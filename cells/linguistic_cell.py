@@ -2,9 +2,8 @@ import hashlib
 
 class LinguisticCell:
     """
-    CÂY CẦU NÂNG CHIỀU NẤC 2:
-    Biến chuỗi chữ viết từ Internet (Wikipedia / Markdown / JSON / Sách báo)
-    thành Vector ngữ nghĩa 4 chiều trong [0.0, 1.0] bằng bọt biển SHAKE-256
+    CÂY CẦU NÂNG CHIỀU NGỮ NGHĨA NEXUS:
+    Biến chuỗi chữ viết từ Internet / Wikipedia / Sách báo thành Vector 4D trong [0.0, 1.0]
     """
     @staticmethod
     def embed_text(text):
@@ -14,7 +13,7 @@ class LinguisticCell:
         clean_text = str(text).strip().lower()
         coords = []
         for d in range(4):
-            seed = f"{clean_text}_semantic_axis_{d}".encode()
+            seed = f"{clean_text}_nexus_axis_{d}".encode()
             val = int(hashlib.shake_256(seed).hexdigest(4), 16) / 65535.0
             coords.append(round(val, 4))
 
