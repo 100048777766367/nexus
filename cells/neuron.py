@@ -25,7 +25,6 @@ class AtomNeuron:
         
         self.load_self()
 
-    # TỰ CHỮA LÀNH (SELF-HEALING ZERO-SPOF)
     def load_self(self):
         if os.path.exists(self.storage_path):
             try:
@@ -41,7 +40,6 @@ class AtomNeuron:
         self.bias = random.uniform(-0.5, 0.5)
         self.save_self()
 
-    # MA TRẬN 1 + N SIÊU XOR KHÚC XẠ THỰC TẠI
     def super_xor_entangle(self, stimulus_vector, context_id):
         masks = []
         for d in range(self.n_xor):
@@ -55,7 +53,6 @@ class AtomNeuron:
                 entangled[i] = round((entangled[i] + m) % 1.0, 4)
         return entangled, masks
 
-    # LAN TRUYỀN TIẾN: Kháng độc tố đầu vào
     def forward(self, inputs):
         self.last_inputs = [max(-10.0, min(10.0, float(x))) for x in inputs[:self.n_in]]
         while len(self.last_inputs) < self.n_in:
@@ -65,12 +62,11 @@ class AtomNeuron:
         self.last_out = sigmoid(tong)
         return self.last_out
 
-    # LAN TRUYỀN NGƯỢC: Tiến hóa và tự điều hòa Chân Không
     def backward(self, delta, lr=0.1):
         safe_delta = max(-5.0, min(5.0, delta))
         for i in range(self.n_in):
             self.weights[i] += lr * safe_delta * self.last_inputs[i]
-            self.weights[i] = round(self.weights[i] * 0.999, 4) # Hút về 0 chống bám chấp
+            self.weights[i] = round(self.weights[i] * 0.999, 4)
         self.bias += lr * safe_delta
         self.save_self()
 
