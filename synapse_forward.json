@@ -1,24 +1,24 @@
 {
     "contract": "bodhi.genome.v1",
     "node_dna": {
-        "identity": "100048777766367/genome",
+        "identity": "100048777766367/nexus",
         "generation": "F1_PRODIGY_GENOME",
         "node_index": 1,
         "pulse_age": 1,
         "parent": "",
         "ancestor_root": "100048777766367/seed",
-        "generation_epoch": 15
+        "generation_epoch": 16
     },
-    "generation_epoch": 15,
-    "timestamp": 1792043195,
-    "decision": 0.5149,
+    "generation_epoch": 16,
+    "timestamp": 1792046221,
+    "decision": 0.5199,
     "command_pulse": [
-        0.5149,
-        0.4851
+        0.5199,
+        0.4801
     ],
     "features": [
-        0.5149,
-        0.4851
+        0.5199,
+        0.4801
     ],
     "gossip_network": [
         "100048777766367/retina",
@@ -26,5 +26,5 @@
         "100048777766367/tactile",
         "100048777766367/olfactory"
     ],
-    "quantum_cid": "b461bda594bbfff5283936ea214dd6649e3879f801a8fbf17251629f421085606bfecae05ec1df59e44be82d0f4909b97df93d13a26a828649e36e611b78fb37"
+    "quantum_cid": "0a88929ecd99240d4ddb7ef0dddc22e78807915ea0693d365a8a2fb749bd7d7a03161499fad433b91713b41c47b0b2532216e428ca231833aaf71f016adbb139"
 }
