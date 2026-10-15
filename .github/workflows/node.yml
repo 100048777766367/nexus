@@ -1,0 +1,52 @@
+name: Unified Prodigy Genome Lifecycle
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+  schedule:
+    - cron: '0 */4 * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  run-unified-genome:
+    runs-on: ubuntu-latest
+    steps:
+      # KÉO CODE BẰNG LINUX GỐC (THOÁT LY NODE.JS HOÀN TOÀN)
+      - name: Kéo mã nguồn bộ gen
+        run: |
+          git clone --depth 1 https://github.com/${{ github.repository }}.git .
+
+      - name: Thiết lập môi trường Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.10'
+
+      # VẬN HÀNH BỘ GEN HỢP NHẤT TOÀN NĂNG (A + B + 1+N)
+      - name: Vận hành Hạt Nhân Bộ Gen Hợp Nhất
+        env:
+          REPO_OWNER: ${{ github.repository_owner }}
+          REPO_PARENT: ${{ github.event.repository.parent.owner.login }}
+        run: python engine.py
+
+      # LƯU VẾT TÍCH BẰNG FAST-FORWARD (CÓ TOKEN BẢO MẬT CHỐNG LỖI 128)
+      - name: Lưu vết tích tiến hóa bộ gen
+        run: |
+          git config --global user.name "Genome-Prodigy-Bot"
+          git config --global user.email "bot@genome.prodigy"
+          
+          # CẤP TOKEN ĐỂ ĐƯỢC PHÉP PUSH (MIỄN NHIỄM LỖI 128)
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          
+          git fetch origin main
+          git reset origin/main
+          git add synapses/ synapse_backward.json synapse_forward.json 2>/dev/null || true
+          
+          if ! git diff --staged --quiet; then
+            git commit -m "🧬 [Bộ Gen Hợp Nhất A+B] Đồng thuận 2/3 & Tiêu hóa tri thức #(1+N) [skip ci]"
+            git push origin main
+          else
+            echo "Môi trường tĩnh, không có biến đổi mới."
+          fi
