@@ -2,11 +2,11 @@
     "node_dna": {
         "identity": "100048777766367/nexus",
         "role": "UNIVERSAL_SYNAPTIC_NEXUS",
-        "generation_epoch": 28,
+        "generation_epoch": 29,
         "pulse_age": 1,
         "active_nodes_count": 4
     },
-    "consensus": 0.4612,
+    "consensus": 0.4659,
     "peers": [
         "100048777766367/retina",
         "100048777766367/cochlea",
